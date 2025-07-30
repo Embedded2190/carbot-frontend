@@ -1,0 +1,47 @@
+body {
+  font-family: sans-serif;
+  background: #f3f3f3;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.chat-container {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#chat-box {
+  height: 300px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 14px;
+}
+
+#chat-box .bot {
+  color: blue;
+}
+
+#chat-box .user {
+  color: green;
+}
+
+form {
+  display: flex;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px;
+}
