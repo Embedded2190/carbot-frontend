@@ -3,7 +3,8 @@ const form = document.getElementById("chat-form");
 const input = document.getElementById("user-input");
 
 // ⚠️ Укажи здесь ссылку на твой backend на Render
-const API_URL = "https://your-api.onrender.com/chat";
+const API_URL = "https://carbot-api.onrender.com/chat";
+
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
