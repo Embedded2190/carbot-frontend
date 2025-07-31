@@ -29,7 +29,20 @@ form.addEventListener("submit", async (e) => {
 function appendMessage(sender, message, className) {
   const div = document.createElement("div");
   div.classList.add(className);
-  div.textContent = `${sender}: ${message}`;
+
+  // Ищем ссылку на изображение в тексте
+  const imageRegex = /(https?:\/\/[^\s\]]+\.(?:png|jpg|jpeg|gif))/i;
+  const match = message.match(imageRegex);
+
+  if (match) {
+    const imageUrl = match[1];
+    const cleanText = message.replace(imageRegex, "").replace(/[\[\]\(\)]/g, "").trim();
+    div.innerHTML = `<strong>${sender}:</strong> ${cleanText}<br><img src="${imageUrl}" style="max-width: 100%; margin-top: 5px;">`;
+  } else {
+    div.innerHTML = `<strong>${sender}:</strong> ${message}`;
+  }
+
   chatBox.appendChild(div);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
+
