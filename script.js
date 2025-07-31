@@ -2,9 +2,7 @@ const chatBox = document.getElementById("chat-box");
 const form = document.getElementById("chat-form");
 const input = document.getElementById("user-input");
 
-// ⚠️ Укажи здесь ссылку на твой backend на Render
 const API_URL = "https://carbot-api.onrender.com/chat";
-
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -30,19 +28,17 @@ function appendMessage(sender, message, className) {
   const div = document.createElement("div");
   div.classList.add(className);
 
-  // Ищем ссылку на изображение в тексте
-  const imageRegex = /(https?:\/\/[^\s\]]+\.(?:png|jpg|jpeg|gif))/i;
-  const match = message.match(imageRegex);
+  // Обработка изображений в ответе
+  const imgRegex = /(https:\/\/[^\s]+\.(jpg|png|gif))/i;
+  const imgMatch = message.match(imgRegex);
 
-  if (match) {
-    const imageUrl = match[1];
-    const cleanText = message.replace(imageRegex, "").replace(/[\[\]\(\)]/g, "").trim();
-    div.innerHTML = `<strong>${sender}:</strong> ${cleanText}<br><img src="${imageUrl}" style="max-width: 100%; margin-top: 5px;">`;
+  if (imgMatch) {
+    const parts = message.split(imgRegex);
+    div.innerHTML = `${sender}: ${parts[0]}<br/><img src="${imgMatch[0]}" style="max-width:100%; border-radius:10px;" />`;
   } else {
-    div.innerHTML = `<strong>${sender}:</strong> ${message}`;
+    div.textContent = `${sender}: ${message}`;
   }
 
   chatBox.appendChild(div);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
-
